@@ -1,21 +1,46 @@
 import { PGlite } from '@electric-sql/pglite';
-import { live } from '@electric-sql/pglite/live';
 import { PGliteProvider } from '@electric-sql/pglite-react';
-import { MyComponent } from './MyComponent';
+import {
+  live,
+  PGliteWithLive,
+} from '@electric-sql/pglite/live';
+import { useEffect, useState } from 'react';
+import { Router } from './router';
+import { Konsta } from './ui';
 
-const db = await PGlite.create({
-  extensions: { live },
-  dataDir: 'idb://my-pgdata',
-});
+export const App = () => {
+  const [db, setDB] = useState<PGliteWithLive | null>(null);
 
-function App() {
+  useEffect(() => {
+    if (db) return;
+    PGlite.create({
+      extensions: { live },
+      dataDir:
+        'idb://memorize-commonly-used-chinese-characters',
+    }).then(async (pglite) => {
+      await pglite.waitReady;
+      if (db) return;
+      setDB(pglite);
+    });
+  }, [db]);
+
+  if (!db) {
+    return (
+      <Konsta.App theme="ios" safeAreas>
+        <Konsta.Page>
+          <div className="h-screen flex items-center justify-center">
+            <Konsta.Preloader />
+          </div>
+        </Konsta.Page>
+      </Konsta.App>
+    );
+  }
+
   return (
-    <>
+    <Konsta.App theme="ios" safeAreas>
       <PGliteProvider db={db}>
-        <MyComponent />
+        <Router />
       </PGliteProvider>
-    </>
+    </Konsta.App>
   );
-}
-
-export default App;
+};
