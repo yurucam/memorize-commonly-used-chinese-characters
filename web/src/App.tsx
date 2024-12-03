@@ -6,6 +6,7 @@ import { Router } from './router';
 import { Konsta } from './ui';
 import { I18nextProvider } from 'react-i18next';
 import { i18n } from './i18n';
+import { databaseInitialize } from './database/database-initialize';
 
 export const App = () => {
   const [db, setDB] = useState<PGliteWithLive | null>(null);
@@ -16,8 +17,9 @@ export const App = () => {
       extensions: { live },
       dataDir: 'idb://memorize-commonly-used-kanji',
     }).then(async (pglite) => {
-      await pglite.waitReady;
       if (db) return;
+      await pglite.waitReady;
+      await databaseInitialize(pglite);
       setDB(pglite);
     });
   }, [db]);
