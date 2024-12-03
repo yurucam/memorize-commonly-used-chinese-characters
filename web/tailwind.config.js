@@ -6,8 +6,7 @@ export default konstaConfig({
   theme: {
     fontFamily: {
       ios: 'Barlow, -apple-system, SF Pro Text, SF UI Text, system-ui, Helvetica Neue, Helvetica, Arial, sans-serif',
-      material:
-        'Barlow, Roboto, system-ui, Noto, Helvetica, Arial, sans-serif',
+      material: 'Barlow, Roboto, system-ui, Noto, Helvetica, Arial, sans-serif',
     },
   },
   konsta: {

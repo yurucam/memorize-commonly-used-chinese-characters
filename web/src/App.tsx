@@ -1,12 +1,11 @@
 import { PGlite } from '@electric-sql/pglite';
 import { PGliteProvider } from '@electric-sql/pglite-react';
-import {
-  live,
-  PGliteWithLive,
-} from '@electric-sql/pglite/live';
+import { live, PGliteWithLive } from '@electric-sql/pglite/live';
 import { useEffect, useState } from 'react';
 import { Router } from './router';
 import { Konsta } from './ui';
+import { I18nextProvider } from 'react-i18next';
+import { i18n } from './i18n';
 
 export const App = () => {
   const [db, setDB] = useState<PGliteWithLive | null>(null);
@@ -15,8 +14,7 @@ export const App = () => {
     if (db) return;
     PGlite.create({
       extensions: { live },
-      dataDir:
-        'idb://memorize-commonly-used-chinese-characters',
+      dataDir: 'idb://memorize-commonly-used-chinese-characters',
     }).then(async (pglite) => {
       await pglite.waitReady;
       if (db) return;
@@ -39,7 +37,9 @@ export const App = () => {
   return (
     <Konsta.App theme="ios" safeAreas>
       <PGliteProvider db={db}>
-        <Router />
+        <I18nextProvider i18n={i18n}>
+          <Router />
+        </I18nextProvider>
       </PGliteProvider>
     </Konsta.App>
   );
