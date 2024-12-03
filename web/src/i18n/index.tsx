@@ -11,22 +11,22 @@ i18n
       ko: {
         translation: {
           'home.title': '🇯🇵 일본어 상용한자 외우기 프로젝트',
-          'home.group-list': '그룹 목록',
-          'home.group-share': '그룹 공유',
+          'home.my-group-list': '내 그룹 목록',
+          'home.group-share-center': '그룹 공유 센터',
         },
       },
       en: {
         translation: {
           'home.title': '🇯🇵 Learn Japanese Kanji',
-          'home.group-list': 'Group List',
-          'home.group-share': 'Group Share',
+          'home.my-group-list': 'My Group List',
+          'home.group-share-center': 'Group Share Center',
         },
       },
       fr: {
         translation: {
           'home.title': '🇯🇵 Apprenez les kanjis japonais',
-          'home.group-list': 'Liste de groupes',
-          'home.group-share': 'Partage de groupe',
+          'home.my-group-list': 'Ma liste de groupes',
+          'home.group-share-center': 'Centre de partage de groupe',
         },
       },
     },
