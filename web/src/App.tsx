@@ -14,7 +14,7 @@ export const App = () => {
     if (db) return;
     PGlite.create({
       extensions: { live },
-      dataDir: 'idb://memorize-commonly-used-chinese-characters',
+      dataDir: 'idb://memorize-commonly-used-kanji',
     }).then(async (pglite) => {
       await pglite.waitReady;
       if (db) return;

@@ -1,14 +1,34 @@
-import { Page, Navbar } from 'konsta/react';
 import { useTranslation } from 'react-i18next';
+import { IoAddOutline } from 'react-icons/io5';
+import { useState } from 'react';
+import { Konsta } from '../../ui';
 
 export const Home = () => {
   const { t } = useTranslation();
+  const [tabIndex, setTabIndex] = useState(0);
 
   return (
     <>
-      <Page>
-        <Navbar title={t('home.title')} />
-      </Page>
+      <Konsta.Page>
+        <Konsta.Navbar title={t('home.title')} />
+
+        <Konsta.Tabbar labels={true} icons={true} className="left-0 bottom-0 fixed">
+          <Konsta.TabbarLink
+            key={1}
+            active={tabIndex === 0}
+            label={t('home.group-list')}
+            icon={<Konsta.Icon ios={<IoAddOutline size={24} />} />}
+            onClick={() => setTabIndex(0)}
+          />
+          <Konsta.TabbarLink
+            key={2}
+            active={tabIndex === 1}
+            label={t('home.group-share')}
+            icon={<Konsta.Icon ios={<IoAddOutline size={24} />} />}
+            onClick={() => setTabIndex(1)}
+          />
+        </Konsta.Tabbar>
+      </Konsta.Page>
     </>
   );
 };
